@@ -1,0 +1,5 @@
+pandas
+paramiko
+argparse
+logging
+flask

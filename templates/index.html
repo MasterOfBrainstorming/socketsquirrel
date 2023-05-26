@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SocketSquirrel</title>
+    <style>
+        .box {
+            border: 1px solid black;
+            padding: 10px;
+            margin-bottom: 10px;
+            max-width: 600px;
+            word-wrap: break-word;
+        }
+        .bold_italic {
+            font-weight: bold;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <pre>
+         _____            _        _    _____             _               _ 
+        / ____|          | |      | |  / ____|           (_)             | |
+       | (___   ___   ___| | _____| |_| (___   __ _ _   _ _ _ __ _ __ ___| |
+        \___ \ / _ \ / __| |/ / _ \ __|\___ \ / _` | | | | | '__| '__/ _ \ |
+        ____) | (_) | (__|   <  __/ |_ ____) | (_| | |_| | | |  | | |  __/ |
+       |_____/ \___/ \___|_|\_\___|\__|_____/ \__, |\__,_|_|_|  |_|  \___|_|
+        _________________________________________| |________________________                        
+        +++++++++++++++++++++++++++++++++++++++++|_|++++++++++++++++++++++++    
+        ©2023 masterofbrainstorming
+    </pre>
+    <div>
+        {% for item in data %}
+            {% for key, value in item.items() %}
+                {% set key = key.split(':') %}
+                <strong>{{ key[0] }} : tcp/{{ key[1] }}</strong>
+                    {% for subkey, subvalue in value.items() %}
+                        {% if subkey == 'sftp exception' %}
+                            <div class="box"><strong>sftp:</strong> 
+                                <div style="color: #e60a0a">{{ subvalue }}</div>
+                            </div>
+                        {% endif %}
+                        {% if subkey == 'sftp' %}
+                            <div class="box"><strong>sftp:</strong> 
+                                <div>{{ subvalue }}</div>
+                            </div>
+                        {% endif %}
+                        {% if subkey == 'ssh exception' %}
+                            <div class="box">
+                                <strong>ssh:</strong>
+                                <div style="color: #e60a0a">{{ subvalue }}</div>
+                            </div>
+                        {% endif %}
+                        {% if subkey == 'ssh' %}
+                            <div class="box">
+                                <strong>ssh:</strong> 
+                                <div class="bold_italic">command:</div> 
+                                <div>{{ subvalue.command }}</div>
+                                
+                                {% if subvalue.output|length > 0 %}
+                                    <div class="bold_italic">output:</div>
+                                    <div>{{ subvalue.output|join }}</div>
+                                {% endif %}
+                                {% if subvalue.error|length > 0 %}
+                                    <div class="bold_italic">error:</div> 
+                                    <div style="color: #e60a0a">{{ subvalue.error }}</div>
+                                {% endif %}
+                                {% if subvalue.retvalue > 0 %}
+                                    <div class="bold_italic">return value:</div>
+                                    <div style="color: #e60a0a">{{ subvalue.retvalue|join }}</div>
+                                {% endif %}
+                            </div>
+                        {% endif %}                        
+                    {% endfor %}
+            {% endfor %}
+        {% endfor %}
+    </div>
+</body>
+</html>
