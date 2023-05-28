@@ -19,7 +19,7 @@ Python script made with Paramiko to SSH multiple endpoint and execute commands, 
 
 ## Installation
 
-The script will require pandas, paramiko, argparse and flask in addition to python standard libraries
+The script will require pandas, paramiko, argparse and flask in addition to python standard libraries. Script is written using python3.9.
 
 ```bash
 pip install -r requirements.txt
@@ -139,12 +139,12 @@ socketsquirrel.py ssh -H examples/example.csv -u example --password mypassword
 
 Uploading files to location /tmp:
 ```bash
-python3.9 socketsquirrel.py scp -d <ip> <ip2> <ip3> -u example --password mypassword -p 22 -f file.txt --up -l '/tmp'
+socketsquirrel.py scp -d <ip> <ip2> <ip3> -u example --password mypassword -p 22 -f file.txt --up -l '/tmp'
 ```
 
 Downloading files from location /tmp:
 ```bash
-python3.9 socketsquirrel.py scp -d <ip> <ip2> <ip3> -u example --password mypassword -p 22 -f file.txt --dl -l '/tmp'
+socketsquirrel.py scp -d <ip> <ip2> <ip3> -u example --password mypassword -p 22 -f file.txt --dl -l '/tmp'
 ```
 
 
